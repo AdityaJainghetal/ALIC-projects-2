@@ -1,0 +1,1 @@
+export const base_url = "https://backend-alic-1.onrender.com/"
