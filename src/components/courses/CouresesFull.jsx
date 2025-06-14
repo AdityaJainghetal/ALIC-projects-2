@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Layout } from '../../layouts/Layout';
+import { CoursesAllGrid } from './CoursesAllGrid';
 const coursesData = [
   {
     id: 1,
@@ -238,7 +239,10 @@ const CouresesFull = () => {
 
   return (
     <>
-     <div className="td_height_112 td_height_lg_60" />
+     {/* <div className="td_height_112 td_height_lg_60" /> */}
+      <div className="col-md-12">
+                     <CoursesAllGrid/>
+               </div>
       <Layout header={9} footer={1}>
 <Container className="my-5">
       <Card className="mb-5 shadow rounded-4 border-0">
