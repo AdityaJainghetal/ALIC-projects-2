@@ -64,8 +64,8 @@ console.log("banners",banners)
   // useEffect(() => {
   //   const fetchBanners = async () => {
   //     try {
-  //       const response = await axios.get("https://backend-alic-1.onrender.com/banner/alldisplay");
-  //       // https://backend-alic-1.onrender.com
+  //       const response = await axios.get("http://localhost:8000/banner/alldisplay");
+  //       // http://localhost:8000
   //       setBanners(response.data);
   //     } catch (error) {
   //       console.error("Error fetching banners:", error);

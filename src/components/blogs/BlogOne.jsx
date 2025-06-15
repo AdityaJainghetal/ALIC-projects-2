@@ -25,7 +25,7 @@ export const BlogOne = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch('https://backend-alic-1.onrender.com/blog/display');
+      const response = await fetch('http://localhost:8000/blog/display');
       if (!response.ok) {
         throw new Error('Failed to fetch blogs');
       }

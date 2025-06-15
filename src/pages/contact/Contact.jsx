@@ -42,7 +42,7 @@ export const Contact = () => {
     setSubmitStatus(null);
 
     try {
-      const response = await axios.post("https://backend-alic-1.onrender.com/contact/add", formData);
+      const response = await axios.post("http://localhost:8000/contact/add", formData);
 
       console.log("API Response:", response.data);
       setSubmitStatus({

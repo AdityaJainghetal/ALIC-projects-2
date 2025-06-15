@@ -16,7 +16,7 @@
 //   useEffect(() => {
 //     const fetchCourses = async () => {
 //       try {
-//         const response = await fetch('https://backend-alic-1.onrender.com/judement/display');
+//         const response = await fetch('http://localhost:8000/judement/display');
 //         if (!response.ok) {
 //           throw new Error('Failed to fetch courses');
 //         }
@@ -115,7 +115,7 @@ export const CoursesAllList = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch('https://backend-alic-1.onrender.com/judement/display');
+        const response = await fetch('http://localhost:8000/judement/display');
         if (!response.ok) {
           throw new Error('Failed to fetch courses');
         }

@@ -148,7 +148,7 @@ const DetailSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://backend-alic-1.onrender.com/whatsnew/${id}`);
+        const response = await fetch(`http://localhost:8000/whatsnew/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

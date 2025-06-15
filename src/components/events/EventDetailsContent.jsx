@@ -19,7 +19,7 @@ export const EventDetailsContent = () => {
     const fetchEvent = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`https://backend-alic-1.onrender.com/event/${id}`);
+        const res = await axios.get(`http://localhost:8000/event/${id}`);
         setEvent(res.data);
       } catch (err) {
         console.error("Failed to fetch event", err);
@@ -247,7 +247,7 @@ export const EventDetailsContent = () => {
                 Remaining Time For Event
               </p>
 
-              <div className="td_countdown td_style_1">
+              {/* <div className="td_countdown td_style_1">
                 <Countdown
                   date={event.StartDate ? new Date(event.StartDate) : new Date("2024-12-31T23:59:59")}
                   renderer={({ days, hours, minutes, seconds, completed }) => (
@@ -267,7 +267,7 @@ export const EventDetailsContent = () => {
                     </>
                   )}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

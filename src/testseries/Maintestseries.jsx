@@ -50,7 +50,7 @@
 //     const fetchProduct = async () => {
 //       try {
 //         setLoading(true);
-//         const res = await axios.get(`https://backend-alic-1.onrender.com/main/maintestseries/${id}`);
+//         const res = await axios.get(`http://localhost:8000/main/maintestseries/${id}`);
 //         console.log(res)
 //         setProduct(res.data);
 
@@ -674,7 +674,7 @@ export const Maintestseries = ({ courseId }) => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`https://backend-alic-1.onrender.com/main/maintestseries/${id}`);
+        const res = await axios.get(`http://localhost:8000/main/maintestseries/${id}`);
         setProduct(res.data);
       } catch (err) {
         console.error("Failed to fetch product", err);
