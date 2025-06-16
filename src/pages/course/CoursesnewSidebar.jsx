@@ -223,15 +223,248 @@
 // export default SidebarContent;
 
 
+// import React, { useEffect, useState } from "react";
+// import { Nav } from "react-bootstrap";
+// import { fetchcategory, fetchSubcategory } from "../../api";
+// import { toast } from "react-toastify";
+
+// const SidebarContent = ({ activeTab, setActiveTab }) => {
+//   const [categories, setCategories] = useState([]);
+//   const [subCategories, setSubCategories] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [selectedCategory, setSelectedCategory] = useState(null);
+
+//   useEffect(() => {
+//     const fetchAllSubcategories = async () => {
+//       try {
+//         const response = await fetchSubcategory();
+//         if (response.data) {
+//           setSubCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching subcategories:", error);
+//         toast.error("Failed to load subcategories. Please try again.");
+//       }
+//     };
+//     fetchAllSubcategories();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       setLoading(true);
+//       try {
+//         const response = await fetchcategory();
+//         if (response.data) {
+//           setCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching categories:", error);
+//         toast.error("Failed to load categories. Please try again.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   // Filter subcategories based on selected category
+//   const filteredSubCategories = selectedCategory
+//     ? subCategories.filter((subCat) => subCat.category === selectedCategory)
+//     : subCategories;
+
+//   return (
+//     <div className="p-3">
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Courses</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {categories.map((category) => (
+//             <div className="form-check" key={category._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={selectedCategory === category._id}
+//                 onChange={() => 
+//                   setSelectedCategory(selectedCategory === category._id ? null : category._id)
+//                 }
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   selectedCategory === category._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 onClick={() => 
+//                   setSelectedCategory(selectedCategory === category._id ? null : category._id)
+//                 }
+//               >
+//                 {category.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Judicary</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {filteredSubCategories.map((subCategory) => (
+//             <div className="form-check" key={subCategory._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={activeTab === subCategory._id}
+//                 onChange={() => setActiveTab(subCategory._id)}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   activeTab === subCategory._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 onClick={() => setActiveTab(subCategory._id)}
+//               >
+//                 {subCategory.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SidebarContent;
+
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { Nav } from "react-bootstrap";
+// import { fetchcategory, fetchSubcategory } from "../../api";
+// import { toast } from "react-toastify";
+// import { Navigate, useNavigate } from "react-router-dom";
+
+// const SidebarContent = ({ activeTab, setActiveTab , setSelectedCourseId}) => {
+//   const [categories, setCategories] = useState([]);
+//   const [subCategories, setSubCategories] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [selectedCategory, setSelectedCategory] = useState(null);
+//   const [selectedCourse, setSelectedCourse] = useState(null);
+
+
+
+//   useEffect(() => {
+//     const fetchAllSubcategories = async () => {
+//       try {
+//         const response = await fetchSubcategory();
+//         if (response.data) {
+//           setSubCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching subcategories:", error);
+//         toast.error("Failed to load subcategories. Please try again.");
+//       }
+//     };
+//     fetchAllSubcategories();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       setLoading(true);
+//       try {
+//         const response = await fetchcategory();
+//         if (response.data) {
+//           setCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching categories:", error);
+//         toast.error("Failed to load categories. Please try again.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   // Filter subcategories based on selected category
+//   const filteredSubCategories = selectedCategory
+//     ? subCategories.filter((subCat) => subCat.category === selectedCategory)
+//     : subCategories;
+
+//   const handleCourseClick = (courseId) => {
+//     setSelectedCourse(selectedCourse === courseId ? null : courseId);
+//    setSelectedCourseId(selectedCourse)
+//     // You can use the courseId here as needed
+//     console.log("Selected Course ID:", );
+  
+//   };
+
+//   return (
+//     <div className="p-3">
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Courses</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {categories.map((category) => (
+//             <div className="form-check" key={category._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={selectedCourse === category._id}
+//                 onChange={() => handleCourseClick(category._id)}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   selectedCourse === category._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 onClick={() => handleCourseClick(category._id)}
+//               >
+//                 {category.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Judicary</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {filteredSubCategories.map((subCategory) => (
+//             <div className="form-check" key={subCategory._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={activeTab === subCategory._id}
+//                 onChange={() => setActiveTab(subCategory._id)}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   activeTab === subCategory._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 onClick={() => setActiveTab(subCategory._id)}
+//               >
+//                 {subCategory.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SidebarContent;
+
+
+
+
+
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { fetchcategory, fetchSubcategory } from "../../api";
 import { toast } from "react-toastify";
 
-const SidebarContent = ({ activeTab, setActiveTab }) => {
+const SidebarContent = ({ activeTab, setActiveTab, setSelectedCourseId }) => {
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
@@ -267,9 +500,20 @@ const SidebarContent = ({ activeTab, setActiveTab }) => {
     fetchCategories();
   }, []);
 
+  const handleCourseClick = (courseId) => {
+    const isSelected = selectedCourse === courseId;
+    const newCourseId = isSelected ? null : courseId;
+    setSelectedCourse(newCourseId);
+    setSelectedCourseId(newCourseId);
+  };
+
+  const handleSubCategoryClick = (subCatId) => {
+    setActiveTab(subCatId === activeTab ? null : subCatId);
+  };
+
   // Filter subcategories based on selected category
-  const filteredSubCategories = selectedCategory
-    ? subCategories.filter((subCat) => subCat.category === selectedCategory)
+  const filteredSubCategories = selectedCourse
+    ? subCategories.filter((subCat) => subCat.category === selectedCourse)
     : subCategories;
 
   return (
@@ -282,18 +526,15 @@ const SidebarContent = ({ activeTab, setActiveTab }) => {
               <input
                 className="form-check-input"
                 type="checkbox"
-                checked={selectedCategory === category._id}
-                onChange={() => 
-                  setSelectedCategory(selectedCategory === category._id ? null : category._id)
-                }
+                checked={selectedCourse === category._id}
+                onChange={() => handleCourseClick(category._id)}
+                id={`course-${category._id}`}
               />
               <label
                 className={`form-check-label fw-medium ${
-                  selectedCategory === category._id ? "text-primary fw-bold" : ""
+                  selectedCourse === category._id ? "text-primary fw-bold" : ""
                 }`}
-                onClick={() => 
-                  setSelectedCategory(selectedCategory === category._id ? null : category._id)
-                }
+                htmlFor={`course-${category._id}`}
               >
                 {category.name}
               </label>
@@ -311,13 +552,14 @@ const SidebarContent = ({ activeTab, setActiveTab }) => {
                 className="form-check-input"
                 type="checkbox"
                 checked={activeTab === subCategory._id}
-                onChange={() => setActiveTab(subCategory._id)}
+                onChange={() => handleSubCategoryClick(subCategory._id)}
+                id={`subcat-${subCategory._id}`}
               />
               <label
                 className={`form-check-label fw-medium ${
                   activeTab === subCategory._id ? "text-primary fw-bold" : ""
                 }`}
-                onClick={() => setActiveTab(subCategory._id)}
+                htmlFor={`subcat-${subCategory._id}`}
               >
                 {subCategory.name}
               </label>

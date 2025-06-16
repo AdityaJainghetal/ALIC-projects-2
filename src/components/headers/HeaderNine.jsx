@@ -292,7 +292,7 @@ export const HeaderNine = () => {
       {categories.map((category) => (
         <li key={category._id}>
           <Link 
-            to={`/coursesone?category=${category._id}`}
+            to={`/coursesone`}
             className="dropdown-item"
             onClick={() => setSelectedCategory(category._id)}
           >

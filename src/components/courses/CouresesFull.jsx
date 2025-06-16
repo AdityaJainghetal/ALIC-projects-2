@@ -1306,7 +1306,7 @@ const CouresesFull = () => {
                     <div className="mb-2">
                       <strong>💰 Price:</strong> 
                       <span className="text-success fw-bold ms-2">
-                        {course.price ? `$${course.price}` : 'Free'}
+                        {course.Price ? `$${course.Price}` : 'Free'}
                       </span>
                       {course.originalPrice && course.originalPrice > course.price && (
                         <span className="text-decoration-line-through text-muted ms-2">
@@ -1316,15 +1316,15 @@ const CouresesFull = () => {
                     </div>
                     <div className="mb-2">
                       <strong>⏳ Duration:</strong> 
-                      <span className="ms-2">{course.duration || "Self-paced"}</span>
+                      <span className="ms-2">{course.Durations || "Self-paced"}</span>
                     </div>
                     <div className="mb-2">
                       <strong>👨‍🏫 Instructor:</strong> 
-                      <span className="ms-2">{course.instructor || "Expert Team"}</span>
+                      <span className="ms-2">{course.InstructorCourse || "Expert Team"}</span>
                     </div>
                     <div className="mb-2">
                       <strong>📅 Start Date:</strong> 
-                      <span className="ms-2">{course.startDate || "Enroll anytime"}</span>
+                      <span className="ms-2">{course.LastDate || "Enroll anytime"}</span>
                     </div>
                     <div>
                       <strong>🎓 Level:</strong> 

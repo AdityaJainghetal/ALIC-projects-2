@@ -72,6 +72,8 @@ function App() {
         <Route path="/courses-list-view" element={<CoursesListView />} />
         <Route path="/judgements" element={< Judgement/>} />
         <Route path="/judgements/:id" element={< Judgement/>} />
+
+        <Route path="/judgements/:id" element={< Judgement/>} />
         {/* <Route path="/courses/:id" element={<CoursesOne/>}/> */}
 
 
@@ -81,6 +83,10 @@ function App() {
         <Route path="/foundation" element={<Foundation />} />
         <Route path="/coursesone" element={<CoursesPage />} />
         <Route path="/foundation-courses" element={<FoundationCourses />} />
+      
+
+        {/* <Route path="/foundation-courses/:id" element={<FoundationCoursess/>} /> */}
+
         <Route path="/courses-layout" element={<CourseLayout />} />
 
 
