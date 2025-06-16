@@ -13,7 +13,7 @@ const PrelimsTestSeries = () => {
                 "Detailed solutions and ranking",
                 "Topic-wise performance analysis"
             ],
-            price: "₹5,000",
+            price: "₹5,000", 
             duration: "6 Months",
             faculty: "Test Team",
             type: "Test Series"

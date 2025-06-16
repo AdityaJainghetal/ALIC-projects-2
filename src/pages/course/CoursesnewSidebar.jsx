@@ -455,17 +455,259 @@
 
 
 
+// import React, { useEffect, useState } from "react";
+// import { Nav } from "react-bootstrap";
+// import { fetchcategory, fetchSubcategory } from "../../api";
+// import { toast } from "react-toastify";
+
+// const SidebarContent = ({ activeTab, setActiveTab, setSelectedCourseId }) => {
+//   const [categories, setCategories] = useState([]);
+//   const [subCategories, setSubCategories] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [selectedCourse, setSelectedCourse] = useState(null);
+//   const [selectedCategory, setSelectedCategory] = useState(null);
+
+//   useEffect(() => {
+//     const fetchAllSubcategories = async () => {
+//       try {
+//         const response = await fetchSubcategory();
+//         if (response.data) {
+//           setSubCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching subcategories:", error);
+//         toast.error("Failed to load subcategories. Please try again.");
+//       }
+//     };
+//     fetchAllSubcategories();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       setLoading(true);
+//       try {
+//         const response = await fetchcategory();
+//         if (response.data) {
+//           setCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching categories:", error);
+//         toast.error("Failed to load categories. Please try again.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   const handleCourseClick = (courseId) => {
+//     const isSelected = selectedCourse === courseId;
+//     const newCourseId = isSelected ? null : courseId;
+//     setSelectedCourse(newCourseId);
+//     setSelectedCourseId(newCourseId);
+//   };
+
+//   const handleSubCategoryClick = (subCatId) => {
+//     setActiveTab(subCatId === activeTab ? null : subCatId);
+//   };
+
+//   // Filter subcategories based on selected category
+//   const filteredSubCategories = selectedCourse
+//     ? subCategories.filter((subCat) => subCat.category === selectedCourse)
+//     : subCategories;
+
+//   return (
+//     <div className="p-3">
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Courses</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {categories.map((category) => (
+//             <div className="form-check" key={category._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={selectedCourse === category._id}
+//                 onChange={() => handleCourseClick(category._id)}
+//                 id={`course-${category._id}`}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   selectedCourse === category._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 htmlFor={`course-${category._id}`}
+//               >
+//                 {category.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Judicary</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {filteredSubCategories.map((subCategory) => (
+//             <div className="form-check" key={subCategory._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={activeTab === subCategory._id}
+//                 onChange={() => handleSubCategoryClick(subCategory._id)}
+//                 id={`subcat-${subCategory._id}`}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   activeTab === subCategory._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 htmlFor={`subcat-${subCategory._id}`}
+//               >
+//                 {subCategory.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SidebarContent;
+
+// import React, { useEffect, useState } from "react";
+// import { Nav } from "react-bootstrap";
+// import { fetchcategory, fetchSubcategory } from "../../api";
+// import { toast } from "react-toastify";
+
+// const SidebarContent = ({ activeTab, setActiveTab, onSelectionChange }) => {
+//   const [categories, setCategories] = useState([]);
+//   const [subCategories, setSubCategories] = useState([]);
+//   const [loading, setLoading] = useState(false);
+//   const [selectedCourse, setSelectedCourse] = useState(null);
+
+//   useEffect(() => {
+//     const fetchAllSubcategories = async () => {
+//       try {
+//         const response = await fetchSubcategory();
+//         if (response.data) {
+//           setSubCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching subcategories:", error);
+//         toast.error("Failed to load subcategories. Please try again.");
+//       }
+//     };
+//     fetchAllSubcategories();
+//   }, []);
+
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       setLoading(true);
+//       try {
+//         const response = await fetchcategory();
+//         if (response.data) {
+//           setCategories(response.data);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching categories:", error);
+//         toast.error("Failed to load categories. Please try again.");
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   const handleCourseClick = (courseId) => {
+//     const isSelected = selectedCourse === courseId;
+//     const newCourseId = isSelected ? null : courseId;
+//     setSelectedCourse(newCourseId);
+//     onSelectionChange({ categoryId: newCourseId, subCategoryId: activeTab });
+//   };
+
+//   const handleSubCategoryClick = (subCatId) => {
+//     const newSubCatId = activeTab === subCatId ? null : subCatId;
+//     setActiveTab(newSubCatId);
+//     onSelectionChange({ categoryId: selectedCourse, subCategoryId: newSubCatId });
+//   };
+
+//   const filteredSubCategories = selectedCourse
+//     ? subCategories.filter((subCat) => subCat.category === selectedCourse)
+//     : subCategories;
+
+//   return (
+//     <div className="p-3">
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Courses</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {categories.map((category) => (
+//             <div className="form-check" key={category._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={selectedCourse === category._id}
+//                 onChange={() => handleCourseClick(category._id)}
+//                 id={`course-${category._id}`}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   selectedCourse === category._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 htmlFor={`course-${category._id}`}
+//               >
+//                 {category.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+
+//       <h5 className="fw-bold mb-3 border-bottom pb-2">Judicary</h5>
+//       <div className="mb-4">
+//         <Nav className="flex-column gap-2">
+//           {filteredSubCategories.map((subCategory) => (
+//             <div className="form-check" key={subCategory._id}>
+//               <input
+//                 className="form-check-input"
+//                 type="checkbox"
+//                 checked={activeTab === subCategory._id}
+//                 onChange={() => handleSubCategoryClick(subCategory._id)}
+//                 id={`subcat-${subCategory._id}`}
+//               />
+//               <label
+//                 className={`form-check-label fw-medium ${
+//                   activeTab === subCategory._id ? "text-primary fw-bold" : ""
+//                 }`}
+//                 htmlFor={`subcat-${subCategory._id}`}
+//               >
+//                 {subCategory.name}
+//               </label>
+//             </div>
+//           ))}
+//         </Nav>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SidebarContent;
+
+
+
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { fetchcategory, fetchSubcategory } from "../../api";
 import { toast } from "react-toastify";
 
-const SidebarContent = ({ activeTab, setActiveTab, setSelectedCourseId }) => {
+const SidebarContent = ({
+  activeTab,
+  setActiveTab,
+  setSelectedCategoryId,
+  setSelectedSubCategoryId,
+}) => {
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const fetchAllSubcategories = async () => {
@@ -504,14 +746,15 @@ const SidebarContent = ({ activeTab, setActiveTab, setSelectedCourseId }) => {
     const isSelected = selectedCourse === courseId;
     const newCourseId = isSelected ? null : courseId;
     setSelectedCourse(newCourseId);
-    setSelectedCourseId(newCourseId);
+    setSelectedCategoryId(newCourseId);
   };
 
   const handleSubCategoryClick = (subCatId) => {
-    setActiveTab(subCatId === activeTab ? null : subCatId);
+    const newSubCatId = activeTab === subCatId ? null : subCatId;
+    setActiveTab(newSubCatId);
+    setSelectedSubCategoryId(newSubCatId);
   };
 
-  // Filter subcategories based on selected category
   const filteredSubCategories = selectedCourse
     ? subCategories.filter((subCat) => subCat.category === selectedCourse)
     : subCategories;
@@ -543,7 +786,7 @@ const SidebarContent = ({ activeTab, setActiveTab, setSelectedCourseId }) => {
         </Nav>
       </div>
 
-      <h5 className="fw-bold mb-3 border-bottom pb-2">Judicary</h5>
+      <h5 className="fw-bold mb-3 border-bottom pb-2">Judiciary</h5>
       <div className="mb-4">
         <Nav className="flex-column gap-2">
           {filteredSubCategories.map((subCategory) => (

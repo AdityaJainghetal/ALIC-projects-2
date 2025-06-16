@@ -87,7 +87,7 @@ function App() {
 
         {/* <Route path="/foundation-courses/:id" element={<FoundationCoursess/>} /> */}
 
-        <Route path="/courses-layout" element={<CourseLayout />} />
+        <Route path="/courses-layout/:id" element={<CourseLayout />} />
 
 
 
