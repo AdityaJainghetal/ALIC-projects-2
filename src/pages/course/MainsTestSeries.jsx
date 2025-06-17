@@ -115,7 +115,7 @@
 
 //     const fetchCourses = async () => {
 //         try {
-//             const response = await axios.get('http://localhost:8000/main/display');
+//             const response = await axios.get('https://backend-alic-3.onrender.com/main/display');
 //             if (response.data && Array.isArray(response.data.data)) {
 //                 setCourses(response.data.data);
 //             } else {
@@ -221,7 +221,7 @@
 
 //     const fetchCourses = async () => {
 //         try {
-//             const response = await axios.get('http://localhost:8000/main/display');
+//             const response = await axios.get('https://backend-alic-3.onrender.com/main/display');
 //             if (response.data && Array.isArray(response.data)) {
 //                 setCourses(response.data);
 //             } else if (response.data && Array.isArray(response.data.data)) {
@@ -391,7 +391,7 @@ const MainsTestSeries = ({ selectedCategoryId }) => {
     const fetchCourses = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:8000/main/display');
+            const response = await axios.get('https://backend-alic-3.onrender.com/main/display');
             if (response.data && Array.isArray(response.data.data)) {
                 setCourses(response.data.data);
             } else {

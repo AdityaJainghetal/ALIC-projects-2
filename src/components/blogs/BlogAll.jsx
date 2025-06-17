@@ -26,7 +26,7 @@ export const BlogAll = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch('http://localhost:8000/blog/display');
+      const response = await fetch('https://backend-alic-3.onrender.com/blog/display');
       if (!response.ok) throw new Error('Failed to fetch blogs');
       const data = await response.json();
       const blogsArray = Array.isArray(data) ? data : data.data || [];

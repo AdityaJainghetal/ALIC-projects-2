@@ -23,7 +23,7 @@
 //     const fetchProduct = async () => {
 //       try {
 //         setLoading(true);
-//         const res = await axios.get(`http://localhost:8000/api/courses${id}`);
+//         const res = await axios.get(`https://backend-alic-3.onrender.com/api/courses${id}`);
 //         console.log(res.data)
 //         setCourse(res.data);
 //       } catch (err) {
@@ -240,11 +240,11 @@
 //     const fetchCourse = async () => {
 //       try {
 //         setLoading(true);
-//         const res = await axios.get(`http://localhost:8000/api/courses/${id}`);
+//         const res = await axios.get(`https://backend-alic-3.onrender.com/api/courses/${id}`);
 //         setCourse(res.data);
         
 //         // Fetch related courses (same category or type)
-//         const relatedRes = await axios.get(`http://localhost:8000/api/courses?category=${res.data.category}&exclude=${id}`);
+//         const relatedRes = await axios.get(`https://backend-alic-3.onrender.com/api/courses?category=${res.data.category}&exclude=${id}`);
 //         setRelatedCourses(relatedRes.data);
 //       } catch (err) {
 //         console.error("Failed to fetch course", err);
@@ -464,7 +464,7 @@
 //         setError(null);
         
 //         // Fetch the main course data
-//         const courseResponse = await axios.get(`http://localhost:8000/api/courses/${id}`);
+//         const courseResponse = await axios.get(`https://backend-alic-3.onrender.com/api/courses/${id}`);
 //         if (!courseResponse.data) {
 //           throw new Error('Course not found');
 //         }
@@ -474,7 +474,7 @@
 //         if (courseResponse.data.category) {
 //           try {
 //             const relatedResponse = await axios.get(
-//               `http://localhost:8000/api/courses/related/${courseResponse.data.category}/${id}`
+//               `https://backend-alic-3.onrender.com/api/courses/related/${courseResponse.data.category}/${id}`
 //             );
 //             setRelatedCourses(relatedResponse.data);
 //           } catch (relatedError) {
@@ -771,7 +771,7 @@
 //   //       setError(null);
         
 //   //       // Fetch the main course data
-//   //       const courseResponse = await axios.get(`http://localhost:8000/api/courses/${id}`);
+//   //       const courseResponse = await axios.get(`https://backend-alic-3.onrender.com/api/courses/${id}`);
 //   //       if (!courseResponse.data) {
 //   //         throw new Error('Course not found');
 //   //       }
@@ -779,7 +779,7 @@
         
 //   //       // Fetch related courses if category exists
 //   //       if (courseResponse.data.category) {
-//   //         const relatedResponse = await axios.get(`http://localhost:8000/api/courses?category=${courseResponse.data.category}&limit=4`);
+//   //         const relatedResponse = await axios.get(`https://backend-alic-3.onrender.com/api/courses?category=${courseResponse.data.category}&limit=4`);
 //   //         setRelatedCourses(relatedResponse.data);
 //   //       }
 //   //     } catch (err) {
@@ -810,7 +810,7 @@
 //       setError(null);
       
 //       // Fetch the main course data
-//       const courseResponse = await axios.get(`http://localhost:8000/api/courses/${id}`);
+//       const courseResponse = await axios.get(`https://backend-alic-3.onrender.com/api/courses/${id}`);
 //       if (!courseResponse.data) {
 //         throw new Error('Course not found');
 //       }
@@ -821,7 +821,7 @@
 //         // Extract category ID if category is an object, or use directly if it's a string
 //         const categoryId = courseResponse.data.category._id || courseResponse.data.category;
 //         const relatedResponse = await axios.get(
-//           `http://localhost:8000/api/courses?category=${categoryId}&limit=4`
+//           `https://backend-alic-3.onrender.com/api/courses?category=${categoryId}&limit=4`
 //         );
 //         setRelatedCourses(relatedResponse.data);
 //       }
@@ -1127,7 +1127,7 @@ const CouresesFull = () => {
         setError(null);
         
         // Fetch the main course data
-        const courseResponse = await axios.get(`http://localhost:8000/api/courses/${id}`);
+        const courseResponse = await axios.get(`https://backend-alic-3.onrender.com/api/courses/${id}`);
         if (!courseResponse.data) {
           throw new Error('Course not found');
         }
@@ -1141,7 +1141,7 @@ const CouresesFull = () => {
             : courseResponse.data.category;
           
           // const relatedResponse = await axios.get(
-          //   `http://localhost:8000/api/courses?category=${categoryId}&limit=4&exclude=${id}`
+          //   `https://backend-alic-3.onrender.com/api/courses?category=${categoryId}&limit=4&exclude=${id}`
           // );
           // setRelatedCourses(relatedResponse.data);
         }

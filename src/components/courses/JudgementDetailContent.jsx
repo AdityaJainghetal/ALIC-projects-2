@@ -59,7 +59,7 @@ export const JudgementDetailContent = ({ children }) => {
 //     const fetchProduct = async () => {
 //       try {
 //         setLoading(true);
-//         const res = await axios.get(`http://localhost:8000/judement/course/${id}`);
+//         const res = await axios.get(`https://backend-alic-3.onrender.com/judement/course/${id}`);
 //         setProduct(res.data);
 //       } catch (err) {
 //         console.error("Failed to fetch product", err);

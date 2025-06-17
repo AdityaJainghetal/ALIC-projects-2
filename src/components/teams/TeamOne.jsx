@@ -20,7 +20,7 @@
 //     const [loading, setLoading] = useState(true);
 //     const [error, setError] = useState(null);
 
-//     const apiUrl = 'http://localhost:8000/member/display';
+//     const apiUrl = 'https://backend-alic-3.onrender.com/member/display';
 
 
 
@@ -168,7 +168,7 @@ export const TeamOne = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const apiUrl = 'http://localhost:8000/member/display';
+  const apiUrl = 'https://backend-alic-3.onrender.com/member/display';
 
   useHobble();
 

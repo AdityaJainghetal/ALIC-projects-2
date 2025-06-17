@@ -183,7 +183,7 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
-//         const res = await axios.get(`http://localhost:8000/syllabus/category/${id}`);
+//         const res = await axios.get(`https://backend-alic-3.onrender.com/syllabus/category/${id}`);
 //         setSyllabusData(res.data);
 //         setLoading(false);
 //       } catch (err) {
@@ -213,7 +213,7 @@
 //     e.preventDefault();
 //     try {
 //       // Send the form data to your API endpoint
-//       await axios.post("http://localhost:8000/register/add", formData);
+//       await axios.post("https://backend-alic-3.onrender.com/register/add", formData);
 
 //       console.log("Submitted Data:", formData);
 //       alert(`Download link for ${selectedSyllabus.Coursename} will be sent to ${formData.email}`);
@@ -412,7 +412,7 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
-//         const res = await axios.get(`http://localhost:8000/syllabus/category/${id}`);
+//         const res = await axios.get(`https://backend-alic-3.onrender.com/syllabus/category/${id}`);
 //         setSyllabusData(res.data);
 //       } catch (err) {
 //         setError(err.message);
@@ -452,7 +452,7 @@
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
 //     try {
-//       await axios.post("http://localhost:8000/register/add", formData);
+//       await axios.post("https://backend-alic-3.onrender.com/register/add", formData);
 
 //       if (selectedSyllabus?.pdfUrl) {
 //         handleDownloadPdf(selectedSyllabus.pdfUrl, selectedSyllabus.Coursename);
@@ -672,7 +672,7 @@ export const SyllabusDownload = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/syllabus/category/${id}`);
+        const res = await axios.get(`https://backend-alic-3.onrender.com/syllabus/category/${id}`);
         setSyllabusData(res.data);
       } catch (err) {
         setError(err.message);
@@ -715,7 +715,7 @@ export const SyllabusDownload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/register/add", formData);
+      await axios.post("https://backend-alic-3.onrender.com/register/add", formData);
       if (selectedSyllabus?.pdfUrl) {
         handleDownloadPdf(selectedSyllabus.pdfUrl, selectedSyllabus.Coursename);
       }

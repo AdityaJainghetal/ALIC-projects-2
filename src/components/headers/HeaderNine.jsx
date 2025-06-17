@@ -17,7 +17,7 @@
 //   //   const fetchCategories = async () => {
 //   //     setLoading(true);
 //   //     try {
-//   //       const response = await fetch("http://localhost:8000/category");
+//   //       const response = await fetch("https://backend-alic-3.onrender.com/category");
 //   //       const data = await response.json();
 //   //       if (data) {
 //   //         setCategories(data);
