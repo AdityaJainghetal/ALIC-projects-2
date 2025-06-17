@@ -692,12 +692,11 @@
 // export default SidebarContent;
 
 
-
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { fetchcategory, fetchSubcategory } from "../../api";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const SidebarContent = ({
   activeTab,
@@ -709,10 +708,8 @@ const SidebarContent = ({
   const [subCategories, setSubCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
-
-const {courseId} = useParams()
-
-
+  const { courseId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllSubcategories = async () => {
@@ -747,16 +744,14 @@ const {courseId} = useParams()
     fetchCategories();
   }, []);
 
-
-
   const handleCourseClick = (courseId1) => {
     const isSelected = selectedCourse === courseId1;
     const newCourseId = isSelected ? null : courseId1;
     setSelectedCourse(newCourseId);
     setSelectedCategoryId(newCourseId);
+    // Redirect to /courseone/:courseId
+    navigate(`/coursesone/${courseId1}`);
   };
-  
-
 
   const handleSubCategoryClick = (subCatId) => {
     const newSubCatId = activeTab === subCatId ? null : subCatId;
@@ -768,12 +763,12 @@ const {courseId} = useParams()
     ? subCategories.filter((subCat) => subCat.category === selectedCourse)
     : subCategories;
 
-    useEffect(()=>{
-      
-          setSelectedCourse(courseId)
-          handleCourseClick(courseId)
-      
-  },[courseId])
+  useEffect(() => {
+    if (courseId) {
+      setSelectedCourse(courseId);
+      setSelectedCategoryId(courseId);
+    }
+  }, [courseId, setSelectedCategoryId]);
 
   return (
     <div className="p-3">

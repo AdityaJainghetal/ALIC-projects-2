@@ -504,9 +504,6 @@
 // };
 
 // export default FoundationCourses;
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -519,36 +516,16 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredCourses, setFilteredCourses] = useState([]);
-  const {courseId} = useParams();
-
-  useEffect(() => {
-    fetchCourses();
-  }, []);
-
-  useEffect(() => {
-    if(courseId){
-      // alert("courseone"+courseId)
-    }
-},[courseId])
-
-
-
+  const { id: courseId } = useParams(); // Renamed to avoid confusion with categoryId
+  
   const fetchCourses = async () => {
     setLoading(true);
     try {
       const response = await axios.get('http://localhost:8000/api/alldisplay');
       if (response.data) {
-        console.log(response.data)
-        if(selectedCategoryId || courseId){
-          const filtered = response.data.filter((item)=>{
-            if(item.category._id === selectedCategoryId){
-              return item
-            }
-           })
-           return filterCourses(filtered, selectedCategoryId, selectedSubCategoryId);
-        }
-        
-        return filterCourses(response.data, selectedCategoryId, selectedSubCategoryId);
+        setCourses(response.data);
+        // Prioritize courseId (subcategory ID) from useParams, then fallback to selectedSubCategoryId
+        filterCourses(response.data, selectedCategoryId, courseId || selectedSubCategoryId);
       }
     } catch (error) {
       console.error("Error fetching courses:", error);
@@ -560,31 +537,46 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
 
   const filterCourses = (coursesList, categoryId, subCategoryId) => {
     let filtered = coursesList;
-    console.log(coursesList,categoryId,subCategoryId)
-    // alert("foundation"+categoryId)
+    console.log(courseId)
 
-    if (categoryId) {
+    if(courseId){
+      console.log(filtered)
+      
+      filtered = filtered.filter(course=>
+        course?.subsubCategory?._id == courseId
+      )
+      console.log(filtered)
+
+    }
+
+    
+
+    if (subCategoryId && subCategoryId !== courseId) {
+      console.log(subCategoryId)
+
+      filtered = filtered.filter(course =>
+        course.subCategory && course.subCategory._id === subCategoryId
+      );
+    } 
+
+     if (categoryId) {
+      console.log(categoryId)
+      
       filtered = filtered.filter(course =>
         course.category && course.category._id === categoryId
       );
     }
 
-    if (subCategoryId) {
-      filtered = filtered.filter(course =>
-        course.subCategory && course.subCategory._id === subCategoryId
-      );
-    }
+    
+    
+
 
     setFilteredCourses(filtered);
   };
 
   useEffect(() => {
     fetchCourses();
-  }, [selectedCategoryId]);
-
-  useEffect(() => {
-    filterCourses(courses, selectedCategoryId, selectedSubCategoryId);
-  }, [selectedCategoryId,selectedSubCategoryId]);
+  }, [courseId, selectedCategoryId, selectedSubCategoryId]);
 
   if (loading) {
     return (
@@ -600,7 +592,7 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
     <div className="py-4" style={{ backgroundColor: "#f5f7fa" }}>
       <div className="container">
         <h3 className="text-center mb-4 fw-bold text-dark">
-          {(selectedCategoryId || selectedSubCategoryId || courseId) ? "Filtered Courses" : "All Foundation Courses"}
+          {(courseId || selectedCategoryId || selectedSubCategoryId) ? "Filtered Courses" : "All Foundation Courses"}
         </h3>
         <div className="row g-4">
           {filteredCourses.length > 0 ? (
@@ -662,8 +654,8 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
             ))
           ) : (
             <div className="col-12 text-center py-5">
-              <h5>No courses found {(selectedCategoryId || selectedSubCategoryId) ? "for this selection" : ""}</h5>
-              {!(selectedCategoryId || selectedSubCategoryId) && (
+              <h5>No courses found {(courseId || selectedCategoryId || selectedSubCategoryId) ? "for this selection" : ""}</h5>
+              {!(courseId || selectedCategoryId || selectedSubCategoryId) && (
                 <Button 
                   variant="primary" 
                   onClick={fetchCourses}

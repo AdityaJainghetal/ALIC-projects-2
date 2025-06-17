@@ -7,7 +7,7 @@ const SidebarContent = ({ activeTab, setActiveTab }) => {
 
   useEffect(()=>{
     if(id){
-      alert(id)
+      // alert(id)
     }
   },[id])
   return (

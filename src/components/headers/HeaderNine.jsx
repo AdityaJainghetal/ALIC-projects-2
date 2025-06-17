@@ -294,7 +294,7 @@ export const HeaderNine = () => {
           <Link 
             to={`/coursesone/${category?._id}`}
             className="dropdown-item"
-            // onClick={() => setSelectedCategory(category._id)}
+            onClick={() => setSelectedCategory(category._id)}
           >
             {category.name}
           </Link>
