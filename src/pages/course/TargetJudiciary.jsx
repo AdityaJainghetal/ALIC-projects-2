@@ -169,66 +169,69 @@ const TargetJudiciaryCourse = ({ selectedCategoryId, selectedSubCategoryId }) =>
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [filteredCourses, setFilteredCourses] = useState([]);
-    const { id: courseId } = useParams(); // Renamed to avoid confusion with categoryId
+    const { id: courseId } = useParams();
     
-    const fetchCourses = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get('http://localhost:8000/api/alldisplay');
-            if (response.data) {
-                setCourses(response.data);
-                // Prioritize courseId (subcategory ID) from useParams, then fallback to selectedSubCategoryId
-                filterCourses(response.data, selectedCategoryId, courseId || selectedSubCategoryId);
-            }
-        } catch (error) {
-            console.error("Error fetching courses:", error);
-            toast.error("Failed to load courses. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const fetchCourses = async () => {
+    //     setLoading(true);
+    //     try {
+    //         const response = await axios.get('http://localhost:8000/api/alldisplay');
+    //         if (response.data) {
+    //             setCourses(response.data);
+    //             // Prioritize courseId (subcategory ID) from useParams, then fallback to selectedSubCategoryId
+    //             filterCourses(response.data, selectedCategoryId, courseId || selectedSubCategoryId);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error fetching courses:", error);
+    //         toast.error("Failed to load courses. Please try again.");
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
-    const filterCourses = (coursesList, categoryId, subCategoryId) => {
-        let filtered = coursesList;
-        console.log(courseId)
+    // const filterCourses = (coursesList, categoryId, subCategoryId) => {
+    //     let filtered = coursesList;
+    //     console.log(courseId)
 
-        if(courseId){
-            console.log(filtered)
+    //     if(courseId){
+    //         console.log(filtered)
             
-            filtered = filtered.filter(course=>
-                course?.subsubCategory?._id == courseId
-            )
-            console.log(filtered)
-        }
+    //         filtered = filtered.filter(course=>
+    //             course?.subsubCategory?._id == courseId
+    //         )
+    //         console.log(filtered)
+    //     }
 
-        if (subCategoryId && subCategoryId !== courseId) {
-            console.log(subCategoryId)
-            filtered = filtered.filter(course =>
-                course.subCategory && course.subCategory._id === subCategoryId
-            );
-        } 
+    //     if (subCategoryId && subCategoryId !== courseId) {
+    //         console.log(subCategoryId)
+    //         filtered = filtered.filter(course =>
+    //             course.subCategory && course.subCategory._id === subCategoryId
+    //         );
+    //     } 
 
-        if (categoryId) {
-            console.log(categoryId)
-            filtered = filtered.filter(course =>
-                course.category && course.category._id === categoryId
-            );
-        }
+    //     if (categoryId) {
+    //         console.log(categoryId)
+    //         filtered = filtered.filter(course =>
+    //             course.category && course.category._id === categoryId
+    //         );
+    //     }
 
-        setFilteredCourses(filtered);
-    };
+    //     setFilteredCourses(filtered);
+    // };
 
-    useEffect(() => {
-        fetchCourses();
-    }, [courseId, selectedCategoryId, selectedSubCategoryId]);
+    // useEffect(() => {
+    //     fetchCourses();
+    // }, [courseId, selectedCategoryId, selectedSubCategoryId]);
 
-    if (loading) {
-        return <div className="text-center py-5">Loading...</div>;
-    }
+    // if (loading) {
+    //     return <div className="text-center py-5">Loading...</div>;
+    // }
 
-    if (filteredCourses.length === 0) {
-        return <div className="text-center py-5">No courses found</div>;
-    }
+    // if (filteredCourses.length === 0) {
+    //     return <div className="text-center py-5">No courses found</div>;
+    // }
+
+
+    console.log(selectedCategoryId, "TARGET")
 
     return (
         <div className="py-4" style={{ backgroundColor: "#f5f7fa" }}>

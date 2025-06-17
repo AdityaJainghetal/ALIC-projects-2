@@ -214,7 +214,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { fetchSubsubcategory } from "../../components/api";
 import { toast } from "react-toastify";
 
-export const CoursesAllGrid = () => {
+export const CoursesAllGrid = ({ selectedSubCategoryId }) => {
   const [subsubCategories, setSubsubCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -259,13 +259,18 @@ export const CoursesAllGrid = () => {
       <div className="course-slider-wrapper mb-5">
         <Slider {...sliderSettings}>
           {subsubCategories.map((subsub, idx) => (
-            <div key={subsub._id || idx} className="p-2">
+            // <div key={subsub._id || idx} className="p-2">
+            <div
+              key={subsub._id || idx}
+              className={`p-2 ${subsub._id === selectedSubCategoryId ? 'selected-slide' : ''}`}
+            >
+
               <div className="td_card td_style_3 d-block td_radius_10">
-                
-                   {/* <span className="td_card_label td_accent_bg td_white_color">
+
+                {/* <span className="td_card_label td_accent_bg td_white_color">
                    {subsub.name}
                   </span> */}
-              
+
                 <Link to={`/courses-layout/${subsub._id}`} className="td_card_thumb">
                   <img
                     src={subsub.images?.[0] || "/default-image.jpg"}

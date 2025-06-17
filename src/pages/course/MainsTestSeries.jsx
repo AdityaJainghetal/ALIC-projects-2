@@ -210,10 +210,11 @@ import DOMPurify from 'dompurify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MainsTestSeries = () => {
+const MainsTestSeries = ({selectedCategoryId}) => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    
     useEffect(() => {
         fetchCourses();
     }, []);
