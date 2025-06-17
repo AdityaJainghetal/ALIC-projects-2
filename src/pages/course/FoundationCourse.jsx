@@ -513,19 +513,42 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const {courseId} = useParams();
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    if(courseId){
+      // alert("courseone"+courseId)
+    }
+},[courseId])
+
+
 
   const fetchCourses = async () => {
     setLoading(true);
     try {
       const response = await axios.get('http://localhost:8000/api/alldisplay');
       if (response.data) {
-        setCourses(response.data);
-        filterCourses(response.data, selectedCategoryId, selectedSubCategoryId);
+        console.log(response.data)
+        if(selectedCategoryId || courseId){
+          const filtered = response.data.filter((item)=>{
+            if(item.category._id === selectedCategoryId){
+              return item
+            }
+           })
+           return filterCourses(filtered, selectedCategoryId, selectedSubCategoryId);
+        }
+        
+        return filterCourses(response.data, selectedCategoryId, selectedSubCategoryId);
       }
     } catch (error) {
       console.error("Error fetching courses:", error);
@@ -537,6 +560,8 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
 
   const filterCourses = (coursesList, categoryId, subCategoryId) => {
     let filtered = coursesList;
+    console.log(coursesList,categoryId,subCategoryId)
+    // alert("foundation"+categoryId)
 
     if (categoryId) {
       filtered = filtered.filter(course =>
@@ -555,11 +580,11 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [selectedCategoryId]);
 
   useEffect(() => {
     filterCourses(courses, selectedCategoryId, selectedSubCategoryId);
-  }, [selectedCategoryId, selectedSubCategoryId]);
+  }, [selectedCategoryId,selectedSubCategoryId]);
 
   if (loading) {
     return (
@@ -575,7 +600,7 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
     <div className="py-4" style={{ backgroundColor: "#f5f7fa" }}>
       <div className="container">
         <h3 className="text-center mb-4 fw-bold text-dark">
-          {(selectedCategoryId || selectedSubCategoryId) ? "Filtered Courses" : "All Foundation Courses"}
+          {(selectedCategoryId || selectedSubCategoryId || courseId) ? "Filtered Courses" : "All Foundation Courses"}
         </h3>
         <div className="row g-4">
           {filteredCourses.length > 0 ? (

@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Offcanvas, Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 const SidebarContent = ({ activeTab, setActiveTab }) => {
+  const {id} = useParams()
+
+  useEffect(()=>{
+    if(id){
+      alert(id)
+    }
+  },[id])
   return (
     <div className="p-3">
       <h5 className="fw-bold mb-3 border-bottom pb-2">Courses</h5>
