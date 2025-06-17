@@ -279,10 +279,7 @@ const MainsTestSeries = ({selectedCategoryId}) => {
                                             <span className="fw-bold">Duration:</span>
                                             <span>{test.Durations || 'N/A'}</span>
                                         </div>
-                                        <div className="d-flex justify-content-between mb-2">
-                                            <span className="fw-bold">Type:</span>
-                                            <span>{test.testserie || 'N/A'}</span>
-                                        </div>
+                                      
                                     </div>
                                 </Card.Body>
                                 <Card.Footer className="bg-white">

@@ -607,12 +607,12 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
                       style={{ height: '250px', objectFit: 'cover' }}
                     />
                     <span className="position-absolute top-0 end-0 bg-danger text-white px-2 py-1 small">
-                      {course.Price}
+                     ₹ {course.Price}
                     </span>
                   </div>
                   <Card.Body className="p-3">
                     <Card.Title className="fs-5 text-primary mb-2">{course.title}</Card.Title>
-                    <ul className="mb-2 ps-3 small text-muted">
+                    {/* <ul className="mb-2 ps-3 small text-muted">
                       {course.features && course.features.length > 0 ? (
                         course.features.map((feature, i) => (
                           <li key={i}>{feature}</li>
@@ -620,7 +620,7 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
                       ) : (
                         <li>No features listed</li>
                       )}
-                    </ul>
+                    </ul> */}
                     <div className="small">
                       <div className="d-flex justify-content-between">
                         <span className="fw-semibold">Duration:</span>

@@ -873,10 +873,7 @@ if (
                                             <span className="fw-bold">Duration:</span>
                                             <span>{test.Durations}</span>
                                         </div>
-                                        <div className="d-flex justify-content-between mb-2">
-                                            <span className="fw-bold">Type:</span>
-                                            <span>{test.testseries}</span>
-                                        </div>
+                                       
                                     </div>
                                 </Card.Body>
                                 <Card.Footer className="bg-white">
