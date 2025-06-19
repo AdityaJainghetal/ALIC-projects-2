@@ -92,7 +92,7 @@
 //   useEffect(() => {
 //     const fetchWhatsNew = async () => {
 //       try {
-//         const response = await fetch("https://backend-alic-4.onrender.com/whatsnew/alldisplay");
+//         const response = await fetch("http://localhost:8000/whatsnew/alldisplay");
 //         if (!response.ok) {
 //           throw new Error("Failed to fetch WhatsNew entries");
 //         }
@@ -310,7 +310,7 @@ export default function RecentUpdates() {
   useEffect(() => {
     const fetchWhatsNew = async () => {
       try {
-        const response = await fetch("https://backend-alic-4.onrender.com/whatsnew/alldisplay");
+        const response = await fetch("http://localhost:8000/whatsnew/alldisplay");
         if (!response.ok) {
           throw new Error("Failed to fetch WhatsNew entries");
         }

@@ -23,7 +23,7 @@ export const SyllabusDownload = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`https://backend-alic-4.onrender.com/syllabus/category/${id}`);
+        const res = await axios.get(`http://localhost:8000/syllabus/category/${id}`);
         setSyllabusData(res.data);
       } catch (err) {
         setError(err.message);
@@ -66,7 +66,7 @@ export const SyllabusDownload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://backend-alic-4.onrender.com/register/add", formData);
+      await axios.post("http://localhost:8000/register/add", formData);
       if (selectedSyllabus?.pdfUrl) {
         handleDownloadPdf(selectedSyllabus.pdfUrl, selectedSyllabus.Coursename);
       }

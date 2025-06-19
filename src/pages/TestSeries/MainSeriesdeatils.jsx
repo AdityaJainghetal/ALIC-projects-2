@@ -1,3 +1,6 @@
+
+
+
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Card, Button, Spinner, Alert } from 'react-bootstrap';
@@ -8,54 +11,56 @@ import axios from 'axios';
 import DOMPurify from 'dompurify';
 import dayjs from 'dayjs';
 import { Layout } from '../../layouts/Layout';
-import { CoursesAllGrid } from './CoursesAllGrid';
+import { CoursesAllGrid } from '../../components/courses/CoursesAllGrid';
 
-const CouresesFull = () => {
+const MainSeriesdeatils = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [course, setCourse] = useState(null);
+  const [testSeries, setTestSeries] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [relatedCourses, setRelatedCourses] = useState([]);
+  const [relatedTestSeries, setRelatedTestSeries] = useState([]);
   const [relatedLoading, setRelatedLoading] = useState(false);
 
-  const handleCourseClick = (courseId) => {
-    navigate(`/enroll/${courseId}`);
+  const handleEnrollClick = (testSeriesId) => {
+    navigate(`/enroll/test-series/${testSeriesId}`);
   };
 
   useEffect(() => {
-    const fetchCourseData = async () => {
+    const fetchTestSeriesData = async () => {
       try {
         setLoading(true);
         setError(null);
         
-        // Fetch the main course data
-        const courseResponse = await axios.get(`http://localhost:8000/api/courses/${id}`);
-        if (!courseResponse.data) {
-          throw new Error('Course not found');
+        // Fetch the main test series data
+        const response = await axios.get(`http://localhost:8000/main/maintestseries/${id}`);
+        console.log(response,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        if (!response.data) {
+          throw new Error('Test series not found');
         }
-        setCourse(courseResponse.data);
+        setTestSeries(response.data);
+
         
-        // Fetch related courses if category exists
-        if (courseResponse.data.category) {
+        // Fetch related test series if category exists
+        if (response.data.category) {
           setRelatedLoading(true);
-          const categoryId = typeof courseResponse.data.category === 'object' 
-            ? courseResponse.data.category._id 
-            : courseResponse.data.category;
+          const categoryId = typeof response.data.category === 'object' 
+            ? response.data.category._id 
+            : response.data.category;
           
           // const relatedResponse = await axios.get(
-          //   `http://localhost:8000/api/courses?category=${categoryId}&limit=4&exclude=${id}`
+          //   `http://localhost:8000/test/preseries?category=${categoryId}&limit=4&exclude=${id}`
           // );
-          // setRelatedCourses(relatedResponse.data);
+          // setRelatedTestSeries(relatedResponse.data);
         }
       } catch (err) {
-        console.error("Failed to fetch course:", {
+        console.error("Failed to fetch test series:", {
           message: err.message,
           status: err.response?.status,
           data: err.response?.data,
           config: err.config
         });
-        setError(err.response?.data?.message || err.message || 'Failed to load course details');
+        setError(err.response?.data?.message || err.message || 'Failed to load test series details');
         if (err.response?.status === 404) {
           navigate('/not-found', { replace: true });
         }
@@ -65,7 +70,7 @@ const CouresesFull = () => {
       }
     };
 
-    fetchCourseData();
+    fetchTestSeriesData();
   }, [id, navigate]);
 
   const sliderSettings = {
@@ -92,7 +97,6 @@ const CouresesFull = () => {
     ]
   };
 
-  // Function to sanitize HTML content
   const sanitize = (dirty) => {
     return DOMPurify.sanitize(dirty, {
       ALLOWED_TAGS: ['p', 'strong', 'em', 'ul', 'ol', 'li', 'br', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
@@ -100,7 +104,6 @@ const CouresesFull = () => {
     });
   };
 
-  // Function to format date
   const formatDate = (dateString) => {
     if (!dateString) return "Enroll anytime";
     return dayjs(dateString).format('MMMM D, YYYY');
@@ -110,7 +113,7 @@ const CouresesFull = () => {
     return (
       <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '50vh' }}>
         <Spinner animation="border" variant="primary" />
-        <span className="ms-3">Loading course details...</span>
+        <span className="ms-3">Loading test series details...</span>
       </Container>
     );
   }
@@ -119,7 +122,7 @@ const CouresesFull = () => {
     return (
       <Container className="my-5">
         <Alert variant="danger" className="text-center">
-          <h4>Error Loading Course</h4>
+          <h4>Error Loading Test Series</h4>
           <p>{error}</p>
           <Button variant="primary" onClick={() => window.location.reload()}>
             Try Again
@@ -129,14 +132,14 @@ const CouresesFull = () => {
     );
   }
 
-  if (!course) {
+  if (!testSeries) {
     return (
       <Container className="my-5">
         <Alert variant="warning" className="text-center">
-          <h4>Course Not Found</h4>
-          <p>The requested course could not be found.</p>
-          <Button variant="primary" onClick={() => navigate('/courses')}>
-            Browse All Courses
+          <h4>Test Series Not Found</h4>
+          <p>The requested test series could not be found.</p>
+          <Button variant="primary" onClick={() => navigate('/test-series')}>
+            Browse All Test Series
           </Button>
         </Alert>
       </Container>
@@ -152,7 +155,7 @@ const CouresesFull = () => {
         <Container className="my-5">
           <Card className="mb-5 shadow rounded-4 border-0">
             <Card.Header className="bg-primary text-white d-flex justify-content-between align-items-center rounded-top-4 px-4 py-3">
-              <h2 className="mb-0 fs-4">{course.title || 'Course Title'}</h2>
+              <h2 className="mb-0 fs-4">{testSeries.title || 'Test Series Title'}</h2>
               <Button variant="light" size="sm" onClick={() => navigate(-1)}>
                 ⬅ Back
               </Button>
@@ -160,92 +163,64 @@ const CouresesFull = () => {
 
             <Card.Body className="px-0 py-0">
               <div className="row g-0">
-                {/* Left Column - Video and Description */}
+                {/* Left Column - Image and Description */}
                 <div className="col-md-7 p-4">
                   <div className="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm bg-dark">
-                    {course.URL ? (
-                      <iframe
-                        src={course.URL}
-                        title={`${course.title} preview`}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="border-0"
-                      ></iframe>
+                    {testSeries.images && testSeries.images.length > 0 ? (
+                      <img 
+                        src={testSeries.images[0]}
+                        alt={`${testSeries.title} preview`}
+                        className="img-fluid w-100 h-100 object-fit-cover"
+                      />
                     ) : (
                       <div className="d-flex justify-content-center align-items-center h-100 text-white">
                         <div className="text-center">
-                          <div className="fs-1 mb-2">🎬</div>
-                          <p>Video Coming Soon</p>
+                          <div className="fs-1 mb-2">📝</div>
+                          <p>Test Series Preview</p>
                         </div>
                       </div>
                     )}
                   </div>
 
                   <div className="mt-4">
-                    <h4>Course Description</h4>
-                    <div dangerouslySetInnerHTML={{ __html: sanitize(course.CourseDescription || "No description available.") }} />
+                    <h4>Description</h4>
+                    <div dangerouslySetInnerHTML={{ __html: sanitize(testSeries.CourseDescription || "No description available.") }} />
                     
-                    {course.curriculum && course.curriculum.length > 0 && (
+                    {testSeries.testmodule && (
                       <>
-                        <h5 className="mt-4">Curriculum</h5>
-                        <ul className="list-group">
-                          {course.curriculum.map((item, index) => (
-                            <li key={index} className="list-group-item border-0 ps-0">
-                              <strong>Module {index + 1}:</strong> {item}
-                            </li>
-                          ))}
-                        </ul>
+                        <h5 className="mt-4">Test Modules</h5>
+                        <div className="bg-light p-3 rounded-3">
+                          {testSeries.testmodule}
+                        </div>
                       </>
                     )}
                   </div>
                 </div>
 
-                {/* Right Column - Course Details */}
+                {/* Right Column - Test Series Details */}
                 <div className="col-md-5 p-4 border-start">
                   <h4 className="mb-3 text-secondary d-flex align-items-center gap-2">
-                    <span>🔹</span> Course Details
+                    <span>🔹</span> Test Series Details
                   </h4>
                   
-                  {course.features && course.features.length > 0 && (
-                    <>
-                      <h5>Features</h5>
-                      <ul className="mb-4">
-                        {course.features.map((feature, i) => (
-                          <li key={i} className="mb-2 d-flex align-items-start gap-2">
-                            <span className="text-success">✓</span> {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-
                   <div className="bg-light p-3 rounded-3 mb-4">
                     <div className="mb-2">
                       <strong>💰 Price:</strong> 
                       <span className="text-success fw-bold ms-2">
-                        {course.Price ? `$${course.Price}` : 'Free'}
+                        {testSeries.Price ? `₹${testSeries.Price}` : 'Free'}
                       </span>
-                      {course.originalPrice && course.originalPrice > course.price && (
-                        <span className="text-decoration-line-through text-muted ms-2">
-                          ${course.originalPrice}
-                        </span>
-                      )}
                     </div>
                     <div className="mb-2">
                       <strong>⏳ Duration:</strong> 
-                      <span className="ms-2">{course.Durations || "Self-paced"}</span>
+                      <span className="ms-2">{testSeries.Durations || "Self-paced"}</span>
                     </div>
                     <div className="mb-2">
-                      <strong>👨‍🏫 Instructor:</strong> 
-                      <span className="ms-2">{course.InstructorCourse || "Expert Team"}</span>
-                    </div>
-                    <div className="mb-2">
-                      <strong>📅 Start Date:</strong> 
-                      <span className="ms-2">{formatDate(course.LastDate)}</span>
+                      <strong>📅 Last Date:</strong> 
+                      <span className="ms-2">{formatDate(testSeries.LastDate)}</span>
                     </div>
                     <div>
-                      <strong>🎓 Level:</strong> 
-                      <span className="ms-2">{course.level || "All levels"}</span>
+                      <strong>📝 Tests:</strong> 
+                      <span className="ms-2">{testSeries.testmodule ? "Multiple tests" : "Not specified"}</span>
                     </div>
                   </div>
 
@@ -253,7 +228,7 @@ const CouresesFull = () => {
                     variant="primary"
                     size="lg" 
                     className="w-100 fw-bold shadow-sm py-2 mb-3" 
-                    onClick={() => handleCourseClick(course._id)}
+                    onClick={() => handleEnrollClick(testSeries._id)}
                   >
                     🚀 Enroll Now
                   </Button>
@@ -263,22 +238,20 @@ const CouresesFull = () => {
                     <ul className="list-unstyled">
                       <li className="mb-2 d-flex align-items-start">
                         <span className="text-success me-2">✔</span>
-                        <span>Certificate of completion</span>
+                        <span>Comprehensive test series</span>
                       </li>
                       <li className="mb-2 d-flex align-items-start">
                         <span className="text-success me-2">✔</span>
-                        <span>Lifetime access to course materials</span>
+                        <span>Detailed solutions</span>
                       </li>
                       <li className="mb-2 d-flex align-items-start">
                         <span className="text-success me-2">✔</span>
-                        <span>Q&A support</span>
+                        <span>Performance analysis</span>
                       </li>
-                      {course.downloadableResources && (
-                        <li className="d-flex align-items-start">
-                          <span className="text-success me-2">✔</span>
-                          <span>Downloadable resources</span>
-                        </li>
-                      )}
+                      <li className="d-flex align-items-start">
+                        <span className="text-success me-2">✔</span>
+                        <span>Time-bound tests</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -289,30 +262,36 @@ const CouresesFull = () => {
           {relatedLoading ? (
             <div className="text-center my-4">
               <Spinner animation="border" variant="secondary" />
-              <p className="mt-2">Loading related courses...</p>
+              <p className="mt-2">Loading related test series...</p>
             </div>
-          ) : relatedCourses.length > 0 ? (
+          ) : relatedTestSeries.length > 0 ? (
             <div className="mt-5">
               <h3 className="mb-4">You Might Also Like</h3>
               <Slider {...sliderSettings}>
-                {relatedCourses.map((relatedCourse) => (
-                  <div key={relatedCourse._id} className="px-2">
+                {relatedTestSeries.map((related) => (
+                  <div key={related._id} className="px-2">
                     <Card 
                       className="h-100 cursor-pointer shadow-sm"
-                      onClick={() => navigate(`/courses/${relatedCourse._id}`)}
+                      onClick={() => navigate(`/test-series/${related._id}`)}
                     >
-                      <Card.Img
-                        variant="top"
-                        src={relatedCourse.imageUrl || 'https://via.placeholder.com/300x200?text=Course+Image'}
-                        alt={relatedCourse.title}
-                        style={{ height: '160px', objectFit: 'cover' }}
-                      />
+                      {related.images && related.images.length > 0 ? (
+                        <Card.Img
+                          variant="top"
+                          src={related.images[0]}
+                          alt={related.title}
+                          style={{ height: '160px', objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div className="bg-secondary d-flex justify-content-center align-items-center" style={{ height: '160px' }}>
+                          <span className="text-white">Test Series Image</span>
+                        </div>
+                      )}
                       <Card.Body>
-                        <Card.Title className="fs-6">{relatedCourse.title}</Card.Title>
+                        <Card.Title className="fs-6">{related.title}</Card.Title>
                         <div className="d-flex justify-content-between align-items-center mt-3">
-                          <span className="badge bg-secondary">{relatedCourse.level || 'All Levels'}</span>
+                          <span className="badge bg-secondary">{related.Durations || 'Flexible'}</span>
                           <strong className="text-primary">
-                            {relatedCourse.price ? `$${relatedCourse.price}` : 'Free'}
+                            {related.Price ? `₹${related.Price}` : 'Free'}
                           </strong>
                         </div>
                       </Card.Body>
@@ -328,4 +307,4 @@ const CouresesFull = () => {
   );
 };
 
-export default CouresesFull;
+export default MainSeriesdeatils;

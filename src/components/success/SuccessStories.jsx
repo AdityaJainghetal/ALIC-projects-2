@@ -10,7 +10,7 @@ const SuccessStories = () => {
   useEffect(() => {
     const fetchStories = async () => {
       try {
-        const response = await fetch("https://backend-alic-4.onrender.com/success/display");
+        const response = await fetch("http://localhost:8000/success/display");
         if (!response.ok) {
           throw new Error("Failed to fetch success stories");
         }
