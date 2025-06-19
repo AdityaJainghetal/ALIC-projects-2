@@ -17,7 +17,7 @@ const MainsTestSeries = ({selectedCategoryId}) => {
 
     const fetchCourses = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/main/display');
+            const response = await axios.get('https://backend-alic-5.onrender.com/main/display');
             if (response.data && Array.isArray(response.data)) {
                 setCourses(response.data);
             } else if (response.data && Array.isArray(response.data.data)) {
