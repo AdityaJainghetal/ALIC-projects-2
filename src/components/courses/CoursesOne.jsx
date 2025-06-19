@@ -43,7 +43,7 @@ export const CoursesOne = () => {
   }, []);
 
   const handleCourseClick = (courseId) => {
-    navigate(`/course-details/${courseId}`);
+    navigate(`/courses/${courseId}`);
   };
 
   // Fallback images in case API data doesn't include images

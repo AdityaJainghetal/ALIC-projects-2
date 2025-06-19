@@ -44,10 +44,10 @@ export const BlogOne = () => {
       setLoading(false);
     }
   };
-const handleCourseClick = (courseId) => {
-  navigate(`/blog-details/${courseId}`);
+const handleCourseClick = (blogId) => {
+  console.log('Navigating to blog with ID:', blogId);
+  navigate(`/blog-details/${blogId}`);
 };
-
   // Fallback blog posts if API fails
   const fallbackBlogPosts = [
     {
@@ -149,7 +149,7 @@ const handleCourseClick = (courseId) => {
             const delay = `0.${index + 2}s`;
 
             return (
-              <SwiperSlide key={blog._id || index}>
+             <SwiperSlide key={blog._id || index}>
   <div className="wow fadeInUp" data-wow-duration="1s" data-wow-delay={delay}>
     <BlogOneItem
       src={blogImage}
@@ -157,10 +157,12 @@ const handleCourseClick = (courseId) => {
       author={blog.author || "Unknown Author"}
       title={blog.title || "No Title"}
       description={blog.description || blog.excerpt || "No description available"}
-      onClick={() => handleCourseClick(blog._id || index)}
+      onClick={() => handleCourseClick(blogId._id || `fallback-${index}`)}
     />
   </div>
 </SwiperSlide>
+
+
             );
           })}
         </Swiper>
