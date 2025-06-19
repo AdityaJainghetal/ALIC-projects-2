@@ -303,7 +303,7 @@ export const FaqOne = () => {
   useEffect(() => {
     const fetchFAQs = async () => {
       try {
-        const response = await axios.get('https://backend-alic-3.onrender.com/faq/');
+        const response = await axios.get('https://backend-alic-4.onrender.com/faq/');
         setFaqs(response.data.data);
       } catch (err) {
         setError(err.response?.data?.message || 'Failed to fetch FAQs');

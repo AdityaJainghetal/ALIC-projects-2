@@ -32,7 +32,7 @@ export const MarqueeStrike = () => {
   useEffect(() => {
     const fetchDiscounts = async () => {
       try {
-        const response = await axios.get('https://backend-alic-3.onrender.com/discount/display');
+        const response = await axios.get('https://backend-alic-4.onrender.com/discount/display');
         setDiscounts(response.data.data || []);
         setLoading(false);
       } catch (err) {

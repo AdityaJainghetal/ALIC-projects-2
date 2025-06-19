@@ -415,7 +415,7 @@ export const EventOne = () => {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get("https://backend-alic-3.onrender.com/event");
+      const response = await axios.get("https://backend-alic-4.onrender.com/event");
       setContacts(response.data);
       setIsLoading(false);
     } catch (error) {

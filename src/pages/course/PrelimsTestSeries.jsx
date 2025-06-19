@@ -36,7 +36,7 @@
 
 //       const fetchCourses = async () => {
 //     try {
-//       const response = await axios.get('https://backend-alic-3.onrender.com/test/display');
+//       const response = await axios.get('https://backend-alic-4.onrender.com/test/display');
 //       // Check if response has data property and it's an array
 //       if (response.data && Array.isArray(response.data.data)) {
 //         setCourses(response.data.data);
@@ -135,7 +135,7 @@
 
 //     const fetchCourses = async () => {
 //         try {
-//             const response = await axios.get('https://backend-alic-3.onrender.com/test/display');
+//             const response = await axios.get('https://backend-alic-4.onrender.com/test/display');
 //             if (response.data && Array.isArray(response.data.data)) {
 //                 setCourses(response.data.data);
 //             } else {
@@ -230,7 +230,7 @@
 
 //     const fetchCourses = async () => {
 //         try {
-//             const response = await axios.get('https://backend-alic-3.onrender.com/test/display');
+//             const response = await axios.get('https://backend-alic-4.onrender.com/test/display');
 //             if (response.data && Array.isArray(response.data.data)) {
 //                 setCourses(response.data.data);
 //             } else {
@@ -398,7 +398,7 @@
 
 //     const fetchCourses = async () => {
 //         try {
-//             const response = await axios.get('https://backend-alic-3.onrender.com/test/display');
+//             const response = await axios.get('https://backend-alic-4.onrender.com/test/display');
 //             if (response.data && Array.isArray(response.data.data)) {
 //                 setCourses(response.data.data);
 //             } else {
@@ -567,7 +567,7 @@
 //     const fetchCourses = async () => {
 //         setLoading(true);
 //         try {
-//             const response = await axios.get('https://backend-alic-3.onrender.com/test/display');
+//             const response = await axios.get('https://backend-alic-4.onrender.com/test/display');
 //             if (response.data && Array.isArray(response.data.data)) {
 //                 setCourses(response.data.data);
 //             } else {
@@ -774,7 +774,7 @@ const PrelimsTestSeries = ({ selectedCategoryId }) => {
     const fetchCourses = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://backend-alic-3.onrender.com/test/display');
+            const response = await axios.get('https://backend-alic-4.onrender.com/test/display');
             if (response.data && Array.isArray(response.data.data)) {
                 setCourses(response.data.data);
             } else {

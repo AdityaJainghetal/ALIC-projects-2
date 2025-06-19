@@ -118,7 +118,7 @@
 //   const fetchCourses = async () => {
 //     setLoading(true);
 //     try {
-//       const response = await axios.get('https://backend-alic-3.onrender.com/api/alldisplay');
+//       const response = await axios.get('https://backend-alic-4.onrender.com/api/alldisplay');
 //       if (response.data) {
 //         setCourses(response.data);
 //       }
@@ -231,7 +231,7 @@
 //   const fetchCourses = async () => {
 //     setLoading(true);
 //     try {
-//       const response = await axios.get('https://backend-alic-3.onrender.com/api/alldisplay');
+//       const response = await axios.get('https://backend-alic-4.onrender.com/api/alldisplay');
 //       if (response.data) {
 //         setCourses(response.data);
 //       }
@@ -371,7 +371,7 @@
 //   const fetchCourses = async () => {
 //     setLoading(true);
 //     try {
-//       const response = await axios.get('https://backend-alic-3.onrender.com/api/alldisplay');
+//       const response = await axios.get('https://backend-alic-4.onrender.com/api/alldisplay');
 //       if (response.data) {
 //         setCourses(response.data);
 //         // Initial filter when data is first loaded
@@ -521,7 +521,7 @@ const FoundationCourses = ({ selectedCategoryId, selectedSubCategoryId }) => {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('https://backend-alic-3.onrender.com/api/alldisplay');
+      const response = await axios.get('https://backend-alic-4.onrender.com/api/alldisplay');
       if (response.data) {
         setCourses(response.data);
         // Prioritize courseId (subcategory ID) from useParams, then fallback to selectedSubCategoryId
